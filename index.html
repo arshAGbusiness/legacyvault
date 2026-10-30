@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>LegacyVault — one secure vault for your family's assets</title>
+<meta name="description" content="Digital estate and inheritance vault: asset register, document locker, nominee manager and guided claim packs.">
+<meta property="og:title" content="LegacyVault — one vault, every asset"><meta property="og:description" content="Digital estate and inheritance vault for Indian families."><meta name="theme-color" content="#0F2A44">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230F2A44'/%3E%3Ccircle cx='16' cy='16' r='7' fill='none' stroke='%23E8A33A' stroke-width='3'/%3E%3C/svg%3E">
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#0F2A44;--teal:#1A9988;--amber:#E8A33A;--bg:#F4F2EC;--card:#fff;--ink:#1c2733;--mut:#64707d;--line:#e4e0d6;--red:#c0493b;--r:12px}
+*{box-sizing:border-box}html,body{margin:0}
+body{font:15px/1.5 Inter,system-ui,sans-serif;background:var(--bg);color:var(--ink);display:flex;min-height:100vh}
+h1,h2,h3{font-family:Lora,Georgia,serif;color:var(--navy);margin:0}
+h1{font-size:26px}h2{font-size:18px}h3{font-size:15px;font-family:Inter,sans-serif;font-weight:600}
+aside{width:236px;background:var(--navy);color:#fff;padding:22px 14px;position:sticky;top:0;height:100vh;display:flex;flex-direction:column;gap:4px}
+.logo{display:flex;align-items:center;gap:10px;font:700 19px Lora,serif;padding:0 8px 18px}
+.logo i{width:30px;height:30px;border-radius:8px;border:3px solid var(--amber);display:block}
+aside button.n{all:unset;cursor:pointer;padding:10px 12px;border-radius:9px;color:#c8d3de;display:flex;justify-content:space-between}
+aside button.n:hover{background:#ffffff14}aside button.n.on{background:var(--teal);color:#fff;font-weight:600}
+.side-foot{margin-top:auto;display:flex;flex-direction:column;gap:6px;font-size:13px}
+.side-foot button{all:unset;cursor:pointer;color:#9fb0c1;padding:4px 12px}.side-foot button:hover{color:#fff}
+main{flex:1;padding:30px 34px 60px;max-width:1100px;min-width:0}
+.hd{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+.hd+p,.sub{color:var(--mut);margin:4px 0 20px}
+.bar{height:3px;width:44px;background:var(--amber);margin:8px 0 6px}
+.grid{display:grid;gap:14px}.g3{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}.g2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.card{background:var(--card);border-radius:var(--r);padding:18px;box-shadow:0 1px 2px #0f2a4412;border-left:4px solid var(--teal)}
+.card.a{border-color:var(--amber)}.card.n{border-color:var(--navy)}.card.r{border-color:var(--red)}
+.stat b{display:block;font:700 26px Lora,serif;color:var(--navy)}.stat span{color:var(--mut);font-size:13px}
+.btn{all:unset;cursor:pointer;background:var(--navy);color:#fff;padding:9px 16px;border-radius:9px;font-weight:600;font-size:14px;text-align:center}
+.btn:hover{background:#17406a}.btn.t{background:var(--teal)}.btn.g{background:#fff;color:var(--navy);border:1px solid var(--line)}.btn.s{padding:5px 11px;font-size:13px}.btn.d{background:#fff;color:var(--red);border:1px solid #ecc9c4}
+.btn:focus-visible,input:focus,select:focus{outline:2px solid var(--amber);outline-offset:1px}
+table{width:100%;border-collapse:collapse;background:#fff;border-radius:var(--r);overflow:hidden}
+th{background:var(--navy);color:#fff;text-align:left;font-size:13px;padding:10px 12px}td{padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:middle}
+.tw{overflow-x:auto;border-radius:var(--r);box-shadow:0 1px 2px #0f2a4412}
+.chip{display:inline-block;padding:2px 9px;border-radius:99px;font-size:12px;font-weight:600;background:#e4f3f0;color:#106b5e;margin:1px 3px 1px 0}
+.chip.w{background:#fdf0d8;color:#8a5a06}.chip.b{background:#f8dfdb;color:#9a3224}.chip.g{background:#eceae2;color:var(--mut)}
+.ring{width:132px;height:132px;border-radius:50%;display:grid;place-items:center;flex:none}
+.ring div{width:100px;height:100px;border-radius:50%;background:#fff;display:grid;place-items:center;font:700 30px Lora,serif;color:var(--navy)}
+.row{display:flex;gap:14px;align-items:center}.sp{justify-content:space-between}.wrap{flex-wrap:wrap}
+.gap{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:9px 0;border-bottom:1px solid var(--line)}.gap:last-child{border:0}
+.meter{height:8px;background:#ece8dd;border-radius:9px;overflow:hidden}.meter i{display:block;height:100%;background:var(--teal)}
+label{display:block;font-size:13px;font-weight:600;color:var(--navy);margin-bottom:10px}
+input,select{width:100%;padding:9px 10px;border:1px solid #cfcabc;border-radius:8px;font:inherit;background:#fff;margin-top:4px}
+dialog{border:0;border-radius:16px;padding:24px;width:min(560px,94vw);box-shadow:0 20px 60px #0f2a4455}dialog::backdrop{background:#0f2a4488}
+.f2{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
+.nr{display:grid;grid-template-columns:1.5fr 1fr 80px 34px;gap:8px;margin-bottom:8px}.nr input{margin:0}
+.steps{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:14px 0 18px}
+.st{background:#fff;border:2px solid var(--line);border-radius:10px;padding:9px;font-size:12.5px;color:var(--mut);min-height:62px}
+.st b{display:block;color:var(--amber);font:700 15px Lora,serif}.st.on{border-color:var(--teal);color:var(--ink)}.st.done{background:var(--navy);border-color:var(--navy);color:#dbe5ee}
+.ck{display:flex;gap:9px;align-items:flex-start;font-weight:400;margin:6px 0;color:var(--ink)}.ck input{width:auto;margin:3px 0 0}
+.note{background:#fdf6e7;border-radius:10px;padding:11px 14px;font-size:13.5px;color:#5c4a20;margin:14px 0}
+.empty{text-align:center;color:var(--mut);padding:34px}
+#toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);background:var(--navy);color:#fff;padding:10px 18px;border-radius:99px;opacity:0;transition:.25s;pointer-events:none;z-index:9}#toast.on{opacity:1}
+@media(max-width:820px){body{flex-direction:column}aside{width:100%;height:auto;position:fixed;bottom:0;top:auto;flex-direction:row;padding:6px;z-index:5;order:2;overflow-x:auto}.logo,.side-foot{display:none}
+aside button.n{flex:1;justify-content:center;font-size:12.5px;padding:10px 6px}main{padding:20px 16px 90px}.steps{grid-template-columns:repeat(2,1fr)}.nr{grid-template-columns:1fr 1fr}}
+body.land aside{display:none}body.land main{max-width:none;padding:0}
+.hero{background:var(--navy);color:#fff;padding:70px 8vw 64px}.hero h1{color:#fff;font-size:clamp(32px,5vw,50px);max-width:760px;line-height:1.15}.hero p{color:#c8d3de;font-size:18px;max-width:620px;margin:18px 0 28px}
+.hero .bar{width:64px;margin:18px 0}.hero .btn.t{padding:13px 24px;font-size:16px}.hero .btn.g{background:transparent;color:#fff;border-color:#ffffff55;padding:13px 24px;font-size:16px}
+.sec{padding:44px 8vw}.sec h2{font-size:24px;margin-bottom:18px}.num{font:700 20px Lora,serif;color:var(--amber)}
+.foot a{color:var(--teal);font-weight:600}.foot{margin-top:34px;color:var(--mut);font-size:12.5px;border-top:1px solid var(--line);padding-top:12px}
+dialog{max-height:92vh;overflow:auto}
+@media print{aside,.noprint,.btn{display:none!important}body{background:#fff}.card{box-shadow:none;border:1px solid #ccc}}
+</style></head><body>
+<aside><div class="logo"><i></i>LegacyVault</div><div id="nav" style="display:contents"></div>
+<div class="side-foot"><button data-a="export">Export backup</button><button data-a="import">Import backup</button><button data-a="reset">Clear all data</button></div></aside>
+<main id="main"></main><dialog id="dlg"></dialog><div id="toast"></div>
+<input type="file" id="imp" accept=".json" hidden>
+<script>
+const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const uid=()=>Math.random().toString(36).slice(2,9),KEY='legacyvault.v1',day=864e5;
+const inr=n=>'₹'+Math.abs(Number(n)||0).toLocaleString('en-IN');
+const short=n=>{n=Math.abs(n);return n>=1e7?'₹'+(n/1e7).toFixed(2)+' Cr':n>=1e5?'₹'+(n/1e5).toFixed(2)+' L':inr(n)};
+const KYC='Claimant KYC (PAN, Aadhaar)',DC='Death certificate (attested)';
+const T={'Bank account':{nom:1,d:[DC,KYC,'Bank claim / settlement form','Cancelled cheque of claimant','Indemnity bond (if required)']},
+'Fixed deposit':{nom:1,d:[DC,KYC,'FD receipt / statement','Premature closure & claim form']},
+'Demat account':{nom:1,d:[DC,'Transmission request form (TRF)',KYC,'Client master list']},
+'Mutual funds':{nom:1,d:[DC,'Transmission request form',KYC,'Bank proof of claimant']},
+'PF / EPF':{nom:1,d:[DC,'EPF Form 20 / 10D',KYC,'Bank proof of claimant']},
+'Insurance':{nom:1,d:[DC,'Claim form (Statement A)','Original policy document','Cause-of-death records']},
+'Locker':{nom:1,d:[DC,'Locker agreement & key','Nominee ID proof','Inventory witness form']},
+'Property':{d:['Title / sale deed','Will or succession certificate','Mutation application','Property tax receipts']},
+'Gold & valuables':{d:['Purchase invoices / valuation','Will or family settlement']},
+'Other asset':{d:['Proof of ownership','Will or succession certificate']},
+'Loan':{li:1,d:[DC,'Loan statement','Check for loan-cover insurance']},
+'Credit card':{li:1,d:[DC,'Latest statement','Closure request']}};
+const seed=()=>({demo:1,will:{has:0,date:'',reg:0,loc:''},rules:{wait:7,attest:2},
+assets:[{id:'a1',type:'Bank account',name:'Savings account',inst:'HDFC Bank',ref:'4821',value:850000,mode:'simultaneous',nominees:[{name:'Anita Sharma',rel:'Spouse',share:60},{name:'Rohan Sharma',rel:'Son',share:40}]},
+{id:'a2',type:'Fixed deposit',name:'5-year FD',inst:'SBI',ref:'7310',value:1500000,mode:'successive',nominees:[{name:'Anita Sharma',rel:'Spouse',share:100}]},
+{id:'a3',type:'Mutual funds',name:'Equity SIP folio',inst:'HDFC AMC',ref:'1190',value:2400000,mode:'simultaneous',nominees:[]},
+{id:'a4',type:'Insurance',name:'Term life policy',inst:'LIC',ref:'9042',value:10000000,mode:'simultaneous',nominees:[{name:'Anita Sharma',rel:'Spouse',share:100}]},
+{id:'a5',type:'Property',name:'Flat, Dwarka',inst:'Delhi',ref:'',value:9500000,nominees:[]},
+{id:'a6',type:'Loan',name:'Home loan',inst:'SBI',ref:'6620',value:3200000,nominees:[]}],
+docs:[{id:'d1',title:'PAN card',cat:'Identity',exp:'',link:'',file:'pan.pdf'},{id:'d2',title:'Passport',cat:'Identity',exp:new Date(Date.now()+40*day).toISOString().slice(0,10),link:'',file:'passport.pdf'},
+{id:'d3',title:'Flat sale deed',cat:'Property',exp:'',link:'a5',file:'deed.pdf'}],
+contacts:[{id:'c1',name:'Meera Iyer',rel:'Sister',phone:'98100 00000'},{id:'c2',name:'Karan Mehta',rel:'Family friend',phone:'98100 11111'}],claim:{stage:0,att:[],log:[],checks:{},status:{},heir:''}});
+const load=()=>{try{return JSON.parse(localStorage.getItem(KEY))||seed()}catch(e){return seed()}};
+let S=load(),D=null,V=(()=>{try{return localStorage.getItem('lv.seen')?'overview':'home'}catch(e){return 'overview'}})();const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const toast=m=>{const t=$('#toast');t.textContent=m;t.className='on';clearTimeout(toast.h);toast.h=setTimeout(()=>t.className='',2200)};
+const log=m=>S.claim.log.unshift(new Date().toLocaleString('en-IN')+' — '+m);
+const dleft=d=>d?Math.ceil((new Date(d)-Date.now())/day):null;
+const nomOK=a=>a.nominees.length&&a.nominees.reduce((s,n)=>s+ +n.share,0)==100;
+const assets=()=>S.assets.filter(a=>!T[a.type].li),liabs=()=>S.assets.filter(a=>T[a.type].li);
+const sum=l=>l.reduce((s,a)=>s+ +a.value,0);
+function analyse(){const g=[],need=assets().filter(a=>T[a.type].nom);let nOk=0;
+need.forEach(a=>{if(nomOK(a))nOk++;else g.push({t:a.nominees.length?`Nominee shares on ${a.name} don't total 100%`:`No nominee on ${a.name} (${a.inst})`,f:'Fix',a:'editAsset',id:a.id})});
+const w=S.will,old=w.has&&w.date&&(Date.now()-new Date(w.date))>3*365*day;
+if(!w.has)g.push({t:'No will recorded — property and gold pass by succession law',f:'Add',a:'nav',id:'docs'});else if(old)g.push({t:'Your will is over 3 years old — review it',f:'Review',a:'nav',id:'docs'});
+const bad=S.docs.filter(d=>{const x=dleft(d.exp);return x!==null&&x<=60});bad.forEach(d=>g.push({t:`${d.title} ${dleft(d.exp)<0?'has expired':'expires in '+dleft(d.exp)+' days'}`,f:'Update',a:'editDoc',id:d.id}));
+if(S.contacts.length<2)g.push({t:`Add ${2-S.contacts.length} more trusted contact(s) for multi-party verification`,f:'Add',a:'nav',id:'settle'});
+if(assets().length<5)g.push({t:'Link more assets for a complete map of your estate',f:'Add',a:'addAsset'});
+const sc=Math.round((need.length?nOk/need.length:1)*30+(w.has?(old?10:20):0)+(S.docs.length?(1-bad.length/S.docs.length)*15:0)+Math.min(S.contacts.length,2)/2*20+Math.min(assets().length,5)/5*15);
+return{g,sc}}
+const VIEWS={overview:['Overview'],assets:['Assets'],docs:['Documents'],noms:['Nominees'],settle:['Settlement']};
+function render(){document.body.classList.toggle('land',V=='home');$('#nav').innerHTML=Object.entries(VIEWS).map(([k,v])=>`<button class="n ${V==k?'on':''}" data-a="nav" data-id="${k}">${v[0]}</button>`).join('');
+$('#main').innerHTML=({home:vHome,overview:vOver,assets:vAssets,docs:vDocs,noms:vNoms,settle:vSettle})[V]()+(V=='home'?'':'<div class="foot noprint">LegacyVault is a planning aid, not legal advice. Your data is stored only in this browser. <br><a href="#" data-a="home">About</a> · <a href="#" data-a="export">Export backup</a> · <a href="#" data-a="import">Import backup</a> · <a href="#" data-a="reset">Clear all data</a></div>')}
+function vHome(){const c=[['Assets are invisible','Bank accounts, FDs, demat, PF, insurance and lockers are scattered. Heirs often do not know what exists.'],['Documents are missing','Wills, nominee proofs, policies and deeds sit in drawers, emails and old phones.'],['The process is slow','Every institution has its own forms and proofs. Settlement takes months, sometimes years.']],s=[['Build','Link assets, upload documents, add nominees and trusted contacts.'],['Maintain','Health score flags gaps: missing nominees, expired KYC, an old will.'],['Trigger','Death is verified by certificate, multi-party attestation and a waiting window.'],['Settle','Per-institution claim packs and checklists, tracked to payout.']];
+return `<section class="hero"><div class="logo" style="padding:0 0 30px"><i></i>LegacyVault</div><h1>One vault. Every asset. Zero chasing after a loved one is gone.</h1><div class="bar"></div><p>Map your accounts, policies and property, organise the documents your family will need, and give them a guided, safeguarded path from certificate to claim.</p><div class="row wrap"><button class="btn t" data-a="enter">Open the demo vault</button><button class="btn g" data-a="enterEmpty">Start with an empty vault</button></div></section>
+<section class="sec"><h2>The problem: heirs inherit paperwork</h2><div class="grid g3">${c.map(x=>`<div class="card"><h3>${x[0]}</h3><p style="margin:6px 0 0;color:var(--mut)">${x[1]}</p></div>`).join('')}</div></section>
+<section class="sec" style="background:#fff"><h2>How LegacyVault works</h2><div class="grid g3" style="grid-template-columns:repeat(auto-fit,minmax(200px,1fr))">${s.map((x,i)=>`<div class="card ${i%2?'':'n'}"><span class="num">${i+1}</span> <h3 style="display:inline">${x[0]}</h3><p style="margin:6px 0 0;color:var(--mut)">${x[1]}</p></div>`).join('')}</div>
+<div class="note">The vault is a map and a document pack. Legal ownership still follows the will or succession law.</div></section>
+<section class="sec"><h2>Built for trust</h2><p style="max-width:680px;color:var(--mut)">Multi-party verification, a time-lock the owner can cancel, an audit trail and owner-defined access per nominee. LegacyVault never sells user data. This demo keeps everything in your own browser; nothing is uploaded.</p><button class="btn t" data-a="enter" style="display:inline-block;margin-top:10px">Open the demo vault</button></section>
+<div class="foot" style="margin:0 8vw 30px">LegacyVault demo. Not legal or financial advice; confirm legal points with counsel.</div>`}
+const head=(t,s,b='')=>`<div class="hd"><div><h1>${t}</h1><div class="bar"></div></div><div class="row noprint">${b}</div></div><p class="sub">${s}</p>`;
+const demoBar=()=>S.demo?`<div class="note noprint">You're viewing <b>sample data</b>. <a href="#" data-a="reset" style="color:inherit;font-weight:600">Clear it and start your own vault</a>. Data is stored only in this browser.</div>`:'';
+function vOver(){const{g,sc}=analyse(),A=assets(),L=liabs(),by={};A.forEach(a=>by[a.type]=(by[a.type]||0)+ +a.value);const tot=sum(A),col=sc>=75?'var(--teal)':sc>=45?'var(--amber)':'var(--red)';
+return head('Your legacy at a glance','A map of what your family will need to find — and what to fix today.')+demoBar()+`
+<div class="grid g3"><div class="card stat"><b>${short(tot)}</b><span>Total assets (${A.length})</span></div><div class="card a stat"><b>${short(sum(L))}</b><span>Liabilities (${L.length})</span></div><div class="card n stat"><b>${short(tot-sum(L))}</b><span>Net estate</span></div></div>
+<div class="grid g2" style="margin-top:14px"><div class="card" style="display:flex;align-items:center"><div class="row"><div class="ring" style="background:conic-gradient(${col} ${sc*3.6}deg,#ece8dd 0)"><div>${sc}</div></div><div><h2>Legacy health score</h2><span class="sub" style="margin:4px 0 0;display:block">${g.length?g.length+' gap'+(g.length>1?'s':'')+' to close':'Everything is in order'}</span></div></div></div>
+<div class="card a"><h2>Where your wealth sits</h2><div style="margin-top:12px">${Object.entries(by).sort((a,b)=>b[1]-a[1]).map(([k,v])=>`<div style="margin:8px 0"><div class="row sp"><span>${k}</span><span>${short(v)}</span></div><div class="meter"><i style="width:${v/tot*100}%"></i></div></div>`).join('')||'<div class="empty">No assets yet</div>'}</div></div></div>
+<div class="card n" style="margin-top:14px"><h2>Fix these first</h2><div style="margin-top:6px">${g.map(x=>`<div class="gap"><span>${esc(x.t)}</span><button class="btn s t" data-a="${x.a}" data-id="${x.id||''}">${x.f}</button></div>`).join('')||'<div class="empty">No gaps found. Review again in 12 months.</div>'}</div></div>
+<div class="note">The vault is a map and a document pack. Legal ownership still follows the will or succession law — LegacyVault is not legal advice.</div>`}
+function vAssets(){const rows=S.assets.map(a=>`<tr><td><b>${esc(a.name)}</b><br><span class="chip g">${a.type}</span></td><td>${esc(a.inst)}${a.ref?`<br><small>••${esc(a.ref)}</small>`:''}</td><td style="color:${T[a.type].li?'var(--red)':'inherit'}">${T[a.type].li?'−':''}${inr(a.value)}</td><td>${T[a.type].nom?(nomOK(a)?`<span class="chip">${a.nominees.length} nominee${a.nominees.length>1?'s':''}</span>`:'<span class="chip b">Needs nominee</span>'):'<span class="chip g">Via will</span>'}</td><td style="white-space:nowrap"><button class="btn s g" data-a="editAsset" data-id="${a.id}">Edit</button> <button class="btn s d" data-a="delAsset" data-id="${a.id}">✕</button></td></tr>`).join('');
+return head('Asset register','Every account, policy and holding — and the debts heirs will meet too.','<button class="btn t" data-a="addAsset">+ Add asset or liability</button>')+demoBar()+(rows?`<div class="tw"><table><tr><th>Item</th><th>Institution</th><th>Value</th><th>Nominees</th><th></th></tr>${rows}</table></div>`:'<div class="card empty">Nothing here yet. Add your first asset to start the map.</div>')+`<div class="note">Automatic fetch via Account Aggregator arrives in Phase 2. For now, enter holdings manually.</div>`}
+function vDocs(){const w=S.will,dl=S.docs.map(d=>{const x=dleft(d.exp),l=S.assets.find(a=>a.id==d.link);return `<tr><td><b>${esc(d.title)}</b><br><small>${esc(d.file||'No file name')}</small></td><td><span class="chip g">${d.cat}</span></td><td>${l?esc(l.name):'—'}</td><td>${d.exp?`${d.exp} ${x<0?'<span class="chip b">Expired</span>':x<=60?`<span class="chip w">${x}d left</span>`:''}`:'—'}</td><td style="white-space:nowrap"><button class="btn s g" data-a="editDoc" data-id="${d.id}">Edit</button> <button class="btn s d" data-a="delDoc" data-id="${d.id}">✕</button></td></tr>`}).join('');
+return head('Document locker','Wills, nominee proofs, policies, deeds and KYC — in one place, with expiry reminders.','<button class="btn t" data-a="addDoc">+ Add document</button>')+demoBar()+`
+<div class="card a" style="margin-bottom:14px"><h2>Will status</h2><div class="f2" style="margin-top:12px"><label class="ck"><input type="checkbox" data-w="has" ${w.has?'checked':''}> I have a will</label><label class="ck"><input type="checkbox" data-w="reg" ${w.reg?'checked':''}> Registered with sub-registrar</label>
+<label>Date signed<input type="date" data-w="date" value="${w.date}"></label><label>Where is the original kept?<input data-w="loc" value="${esc(w.loc)}" placeholder="e.g. Bank locker, Lawyer's office"></label></div></div>
+${dl?`<div class="tw"><table><tr><th>Document</th><th>Type</th><th>Linked to</th><th>Expiry</th><th></th></tr>${dl}</table></div>`:'<div class="card empty">No documents yet.</div>'}`}
+function vNoms(){const l=assets().filter(a=>T[a.type].nom);return head('Nominee manager','Up to four nominees per account, simultaneous or successive, checked against each holding.')+demoBar()+`<div class="grid g2">${l.map(a=>`<div class="card ${nomOK(a)?'':'r'}"><div class="row sp"><div><h3>${esc(a.name)}</h3><small>${esc(a.inst)} · ${a.type}</small></div><button class="btn s g noprint" data-a="editAsset" data-id="${a.id}">Edit</button></div><div style="margin-top:10px">${a.nominees.map(n=>`<div class="gap"><span>${esc(n.name)} <small>(${esc(n.rel)})</small></span><b>${n.share}%</b></div>`).join('')||'<span class="chip b">No nominee — heirs will need a succession certificate</span>'}</div>${a.nominees.length?`<small>${a.nominees.length>1?a.mode=='successive'?'Successive: next nominee claims if the first is unavailable':'Simultaneous: shares claimed in parallel':'Single nominee'}</small>`:''}</div>`).join('')||'<div class="card empty">Add bank, FD, demat, insurance or locker items to manage nominees.</div>'}</div><div class="note">Banking Laws (Amendment) Act, 2025 allows up to four nominees on deposits and lockers from 1 Nov 2025. Confirm specifics with each institution.</div>`}
+const STEPS=['Trusted contact reports death','Certificate and ID verified','Waiting window','Heirs unlock claim pack','Forms pre-filled','Status tracked to payout'];
+function vSettle(){const c=S.claim,r=S.rules,st=c.stage,locked=st>0;
+const pr=st<3?st:4+(Object.values(c.checks).some(Boolean)?1:0)+(Object.values(c.status).includes('Settled')?1:0),stepper=`<div class="steps">${STEPS.map((s,i)=>`<div class="st ${i<pr?'done':i==pr?'on':''}"><b>${i+1}</b>${s}</div>`).join('')}</div>`;
+const pick=S.contacts.map(x=>`<option>${esc(x.name)}</option>`).join('');
+let body='';
+if(st==0)body=`<h2>Step 1 · Report a death</h2><p class="sub">Simulation: a trusted contact starts the verified-death workflow.</p>${S.contacts.length?`<label>Reporting contact<select id="rep">${pick}</select></label><button class="btn" data-a="report">Report death (simulate)</button>`:'<span class="chip b">Add a trusted contact first</span>'}`;
+if(st==1){const n=c.att.length;body=`<h2>Step 2 · Verify certificate and identity</h2><label>Death certificate number<input id="cert" value="${esc(c.cert||'')}"></label><label>Reporter's ID reference<input id="idr" value="${esc(c.idr||'')}"></label><p><b>Multi-party attestation</b> (${n}/${r.attest} needed)</p>${S.contacts.map(x=>`<div class="gap"><span>${esc(x.name)} <small>${esc(x.rel)}</small></span>${c.att.includes(x.name)?'<span class="chip">Attested</span>':`<button class="btn s t" data-a="attest" data-id="${esc(x.name)}">Attest</button>`}</div>`).join('')}<br><button class="btn" data-a="verify">Complete verification</button>`}
+if(st==2){const left=Math.max(0,r.wait-(c.days||0));body=`<h2>Step 3 · Time-lock waiting window</h2><p class="sub">Owner pre-set rule: ${r.wait} days. The owner can still cancel a false claim during this window.</p><div class="meter"><i style="width:${(c.days||0)/r.wait*100}%"></i></div><p>${left?left+' day(s) remaining':'Window complete'}</p><div class="row wrap"><button class="btn g" data-a="ff">Fast-forward 1 day</button><button class="btn" data-a="skip" ${left?'':'disabled'}>Skip to end</button><button class="btn t" data-a="unlock" ${left?'disabled style="opacity:.4"':''}>Unlock claim pack</button><button class="btn d" data-a="cancel">I'm alive — cancel claim</button></div>`}
+if(st>=3)body=claims();
+return head('Settlement workflow','From certificate to claim — with safeguards: multi-party verification, time-lock and an audit trail.',locked?'<button class="btn g" data-a="print">Print pack</button><button class="btn d" data-a="resetClaim">Reset simulation</button>':'')+demoBar()+stepper+`<div class="card ${st>=3?'a':'n'}">${body}</div>`+
+`<div class="grid g2" style="margin-top:14px"><div class="card"><h2>Trusted contacts</h2><div style="margin-top:8px">${S.contacts.map(x=>`<div class="gap"><span>${esc(x.name)} <small>${esc(x.rel)} · ${esc(x.phone)}</small></span><button class="btn s d noprint" data-a="delContact" data-id="${x.id}">✕</button></div>`).join('')||'<small>None yet.</small>'}</div><br><button class="btn s t noprint" data-a="addContact">+ Add contact</button></div>
+<div class="card"><h2>Owner rules</h2><div class="f2" style="margin-top:10px"><label>Waiting window (days)<input type="number" min="1" max="60" data-r="wait" value="${r.wait}" ${locked?'disabled':''}></label><label>Attestations needed<input type="number" min="1" max="5" data-r="attest" value="${r.attest}" ${locked?'disabled':''}></label></div><h3>Audit trail</h3><div style="max-height:140px;overflow:auto;font-size:13px;color:var(--mut)">${c.log.map(l=>`<div>${esc(l)}</div>`).join('')||'No events yet.'}</div></div></div>`}
+function claims(){const c=S.claim,noms=[...new Set(S.assets.flatMap(a=>a.nominees.map(n=>n.name)))],h=c.heir;
+const list=S.assets.filter(a=>!h||a.nominees.some(n=>n.name==h)||!T[a.type].nom);const g={};list.filter(a=>!T[a.type].li).forEach(a=>(g[a.inst||a.type]=g[a.inst||a.type]||[]).push(a));
+const li=list.filter(a=>T[a.type].li);
+return `<h2>Claim packs</h2><p class="sub">Owner-defined access: each nominee sees only their holdings.</p><label class="noprint">Viewing as heir<select data-h><option value="">All heirs (executor view)</option>${noms.map(n=>`<option ${n==h?'selected':''}>${esc(n)}</option>`).join('')}</select></label>
+<div class="grid g2">${Object.entries(g).map(([inst,as])=>`<div class="card">${'<h3>'+esc(inst)+'</h3>'}${as.map(a=>{const ds=T[a.type].d,done=ds.filter((_,i)=>c.checks[a.id+':'+i]).length,s=c.status[a.id]||'Not started';return `<div style="margin:12px 0"><div class="row sp"><b>${esc(a.name)}</b><span class="chip ${s=='Settled'?'':'w'}">${s}</span></div><small>${a.type} · ${inr(a.value)}${a.ref?' · ••'+esc(a.ref):''}</small>${ds.map((d,i)=>`<label class="ck"><input type="checkbox" data-ck="${a.id}:${i}" ${c.checks[a.id+':'+i]?'checked':''}>${esc(d)}</label>`).join('')}<div class="meter"><i style="width:${done/ds.length*100}%"></i></div><label class="noprint" style="margin-top:8px">Status<select data-s="${a.id}">${['Not started','Submitted','Under review','Settled'].map(o=>`<option ${o==s?'selected':''}>${o}</option>`).join('')}</select></label></div>`}).join('')}</div>`).join('')||'<div class="empty">No claimable assets for this heir.</div>'}</div>
+${li.length?`<div class="note"><b>Liabilities heirs will see:</b> ${li.map(a=>esc(a.name)+' ('+inr(a.value)+')').join(', ')}. Check for loan-cover insurance before repaying.</div>`:''}`}
+const dlg=$('#dlg'),open=h=>{dlg.innerHTML=h;dlg.showModal()};
+function assetDlg(isNew){const a=D,t=T[a.type];open(`<h2>${isNew?'Add':'Edit'} item</h2><div class="bar"></div><form id="af"><div class="f2"><label>Type<select data-f="type">${Object.keys(T).map(k=>`<option ${k==a.type?'selected':''}>${k}</option>`).join('')}</select></label><label>Name<input data-f="name" value="${esc(a.name)}" required placeholder="e.g. Savings account"></label>
+<label>Institution<input data-f="inst" value="${esc(a.inst)}" placeholder="e.g. HDFC Bank"></label><label>Last 4 digits / ref<input data-f="ref" maxlength="12" value="${esc(a.ref)}"></label></div><label>${t.li?'Amount outstanding':'Current value'} (₹)<input type="number" min="0" data-f="value" value="${a.value}" required></label>
+<div id="noms">${t.nom?nomHtml():'<div class="note">This item has no nominee facility — it passes through your will or succession law.</div>'}</div>
+<div class="row sp" style="margin-top:14px"><button type="button" class="btn g" data-a="close">Cancel</button><button class="btn t">Save</button></div></form>`)}
+const nomHtml=()=>{const s=D.nominees.reduce((x,n)=>x+ +n.share,0);return `<div class="row sp"><h3>Nominees (${D.nominees.length}/4)</h3><span><button type="button" class="btn s g" data-a="addNom">+ Add</button> <button type="button" class="btn s g" data-a="split">Split equally</button></span></div><div style="margin:10px 0">${D.nominees.map((n,i)=>`<div class="nr"><input data-n="${i}:name" placeholder="Full name" value="${esc(n.name)}"><input data-n="${i}:rel" placeholder="Relation" value="${esc(n.rel)}"><input type="number" min="1" max="100" data-n="${i}:share" value="${n.share}"><button type="button" class="btn s d" data-a="delNom" data-id="${i}">✕</button></div>`).join('')}</div>${D.nominees.length?`<div class="row sp"><span class="chip ${s==100?'':'b'}" id="tot">Total ${s}%</span>${D.nominees.length>1?`<select data-f="mode" style="width:auto"><option value="simultaneous" ${D.mode=='simultaneous'?'selected':''}>Simultaneous</option><option value="successive" ${D.mode=='successive'?'selected':''}>Successive</option></select>`:''}</div>`:'<small>No nominee set — add at least one.</small>'}`};
+const docDlg=()=>open(`<h2>${S.docs.find(x=>x.id==D.id)?'Edit':'Add'} document</h2><div class="bar"></div><form id="df"><label>Title<input data-f="title" value="${esc(D.title)}" required></label><div class="f2"><label>Category<select data-f="cat">${['Identity','Will & legal','Property','Insurance','Financial','Medical','Other'].map(k=>`<option ${k==D.cat?'selected':''}>${k}</option>`).join('')}</select></label><label>Expiry date<input type="date" data-f="exp" value="${D.exp}"></label></div>
+<label>Linked asset<select data-f="link"><option value="">None</option>${S.assets.map(a=>`<option value="${a.id}" ${a.id==D.link?'selected':''}>${esc(a.name)}</option>`).join('')}</select></label><label>File (name is recorded; file contents stay on your device in this demo)<input type="file" id="ff"></label>${D.file?`<small>Current: ${esc(D.file)}</small>`:''}
+<div class="row sp" style="margin-top:14px"><button type="button" class="btn g" data-a="close">Cancel</button><button class="btn t">Save</button></div></form>`);
+const conDlg=()=>open(`<h2>Add trusted contact</h2><div class="bar"></div><form id="cf"><label>Name<input id="cn" required></label><label>Relation<input id="cr"></label><label>Phone<input id="cp"></label><div class="row sp"><button type="button" class="btn g" data-a="close">Cancel</button><button class="btn t">Add</button></div></form>`);
+const A={home(){V='home';render();scrollTo(0,0)},enter(){try{localStorage.setItem('lv.seen',1)}catch(e){}V='overview';render();scrollTo(0,0)},enterEmpty(){A.enter();A.reset(1)},nav(id){V=id;render();scrollTo(0,0)},close(){dlg.close()},
+addAsset(){D={id:uid(),type:'Bank account',name:'',inst:'',ref:'',value:'',mode:'simultaneous',nominees:[]};assetDlg(1)},
+editAsset(id){D=JSON.parse(JSON.stringify(S.assets.find(a=>a.id==id)));assetDlg(0)},
+delAsset(id){if(confirm('Delete this item?')){S.assets=S.assets.filter(a=>a.id!=id);S.demo=0;save();render()}},
+addNom(){if(D.nominees.length>=4)return toast('Maximum 4 nominees');D.nominees.push({name:'',rel:'',share:0});$('#noms').innerHTML=nomHtml()},
+delNom(i){D.nominees.splice(i,1);$('#noms').innerHTML=nomHtml()},
+split(){const n=D.nominees.length;if(!n)return;D.nominees.forEach((x,i)=>x.share=Math.floor(100/n)+(i==0?100%n:0));$('#noms').innerHTML=nomHtml()},
+addDoc(){D={id:uid(),title:'',cat:'Identity',exp:'',link:'',file:''};docDlg()},
+editDoc(id){D={...S.docs.find(d=>d.id==id)};docDlg()},delDoc(id){if(confirm('Delete this document?')){S.docs=S.docs.filter(d=>d.id!=id);save();render()}},
+addContact:conDlg,delContact(id){S.contacts=S.contacts.filter(c=>c.id!=id);save();render()},
+report(){S.claim.stage=1;S.claim.reporter=$('#rep').value;log(`Death reported by ${S.claim.reporter}`);save();render()},
+attest(n){S.claim.att.push(n);log(`${n} attested`);save();render()},
+verify(){const c=S.claim;c.cert=$('#cert').value.trim();c.idr=$('#idr').value.trim();if(!c.cert||!c.idr)return toast('Enter certificate and ID reference');if(c.att.length<S.rules.attest)return toast(`Need ${S.rules.attest} attestations`);c.stage=2;c.days=0;log('Certificate, ID and attestations verified; waiting window started');save();render()},
+ff(){S.claim.days=Math.min(S.rules.wait,(S.claim.days||0)+1);log('Waiting window: +1 day');save();render()},skip(){S.claim.days=S.rules.wait;log('Waiting window completed (simulated)');save();render()},
+unlock(){S.claim.stage=3;log('Claim pack unlocked for heirs');save();render()},
+cancel(){const c=S.claim;log('Owner cancelled claim during window');Object.assign(c,{stage:0,att:[],days:0,cert:'',idr:''});save();render();toast('Claim cancelled by owner')},
+resetClaim(){if(confirm('Reset the simulation?')){S.claim={stage:0,att:[],log:S.claim.log,checks:{},status:{},heir:''};save();render()}},
+print(){print()},export(){const b=new Blob([JSON.stringify(S,null,1)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='legacyvault-backup.json';a.click()},
+import(){$('#imp').click()},reset(f){if(f===1||confirm('Delete everything and start a fresh vault?')){S={demo:0,will:{has:0,date:'',reg:0,loc:''},rules:{wait:7,attest:2},assets:[],docs:[],contacts:[],claim:{stage:0,att:[],log:[],checks:{},status:{},heir:''}};save();V='overview';render()}}};
+dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close()});
+document.addEventListener('click',e=>{const b=e.target.closest('[data-a]');if(!b)return;e.preventDefault();A[b.dataset.a]?.(b.dataset.id)});
+document.addEventListener('input',e=>{const t=e.target;if(t.id=='cert')S.claim.cert=t.value;if(t.id=='idr')S.claim.idr=t.value;if(t.dataset.n){const[i,f]=t.dataset.n.split(':');D.nominees[i][f]=f=='share'?+t.value:t.value;const s=D.nominees.reduce((x,n)=>x+ +n.share,0),el=$('#tot');if(el){el.textContent='Total '+s+'%';el.className='chip '+(s==100?'':'b')}}});
+document.addEventListener('change',e=>{const t=e.target,d=t.dataset;
+if(d.f){D[d.f]=t.value;if(d.f=='type'&&dlg.querySelector('#af')){if(!T[t.value].nom)D.nominees=[];assetDlg(!S.assets.find(a=>a.id==D.id))}}
+if(d.w){S.will[d.w]=t.type=='checkbox'?+t.checked:t.value;S.demo=0;save();render()}
+if(d.r){S.rules[d.r]=Math.max(1,+t.value||1);save();render()}
+if(d.ck!==undefined){S.claim.checks[d.ck]=t.checked;save();render()}
+if(d.s){S.claim.status[d.s]=t.value;log(`Status of claim set to ${t.value}`);save();render()}
+if('h' in d){S.claim.heir=t.value;save();render()}
+if(t.id=='imp'&&t.files[0]){const r=new FileReader();r.onload=()=>{try{const j=JSON.parse(r.result);if(!j.assets)throw 0;S=j;save();render();toast('Backup restored')}catch(x){toast('Invalid backup file')}};r.readAsText(t.files[0])}});
+document.addEventListener('submit',e=>{e.preventDefault();const id=e.target.id;
+if(id=='af'){if(T[D.type].nom&&D.nominees.length){if(D.nominees.some(n=>!n.name.trim()))return toast('Name every nominee');if(D.nominees.reduce((s,n)=>s+ +n.share,0)!=100)return toast('Nominee shares must total 100%')}
+D.value=+D.value;const i=S.assets.findIndex(a=>a.id==D.id);i<0?S.assets.push(D):S.assets[i]=D}
+if(id=='df'){const f=$('#ff').files[0];if(f)D.file=f.name;const i=S.docs.findIndex(a=>a.id==D.id);i<0?S.docs.push(D):S.docs[i]=D}
+if(id=='cf')S.contacts.push({id:uid(),name:$('#cn').value,rel:$('#cr').value,phone:$('#cp').value});
+S.demo=0;save();dlg.close();render();toast('Saved')});
+render();
+</script></body></html>
